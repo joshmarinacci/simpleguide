@@ -17,8 +17,11 @@ var text = fs.readFileSync('text.md');
 md(text.toString(),function(err,content) {
         if(err) throw err;
     fs.writeFileSync('text.html',
-        "<html><body>"
+        "<html><head>"
+        +"<link rel='stylesheet' href='style.css'/>"
+        +"</head>"
+        +"<body><div id='content'>"
         +content+
-        "</body></html>");
+        "</div></body></html>");
     console.log('done');
 });

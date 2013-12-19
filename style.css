@@ -1,0 +1,15 @@
+body {
+    margin: 3em;
+    font-family: sans-serif;
+    font-size: 16pt;
+}
+
+#content {
+    border: 0px solid black;
+    width: 50em;
+}
+
+img {
+    max-width: 100%;
+    max-height: 500px;
+}
