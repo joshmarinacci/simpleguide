@@ -6,9 +6,19 @@ too.
 
 My goal with this guide is not to make you an expert in 3D printing. My goal is
 simply to get you from assembly to your first decent print. Your prints won’t be
-perfect. You will still want to calibrate and tweak. You will still have more
-challenging models to print. But hopefully you will be ready to experiment and
-start learning instead of just being frustrated.
+perfect. You will still want to calibrate and tweak. You'll still have more
+challenging models to print; but hopefully you will be ready to experiment and
+start *learning* instead of just being frustrated.
+
+**NOTE**
+
+I did not write this guide from scratch. I'm indebted to the community on
+the PrintrBotTalk forums for helping me get started.  In particular
+[The Complete Guide][forumguide] by *bradleyc* helped me work through
+many important details.
+
+[forumguide]: http://www.printrbottalk.com/forum/viewtopic.php?f=105&t=4454&sid=073d9faec7a3463068ba58c4fc173ce2
+
 
 
 ## Difference between v1 and v2
@@ -178,7 +188,7 @@ select the *Print Panel* tab (right side of the screen), and press the *1* butto
 axis by one millimeter. If you get a connection error or checksum errors then scroll down to the trouble shooting
 section of this guide. You might have to reflash your printer. Don’t worry: it’s a pretty fast process.
 
-** picture of the print panel **
+![Manual control ](console.png)
 
 If moving the X axis worked then try moving the Y and Z axis. You have full manual control over them. Now, one at a
 time, press the *Home* buttons for the X, Y. Don’t do the Z axis yet. Homing will make the printer go as far as it can in
@@ -206,71 +216,103 @@ along with the stepper? If the stepper didn’t move then you may have wiring is
 didn’t then you probably need to tighten up the set screw attaching the gear to the stepper. Head down to trouble
 shooting for how to remove and adjust the stepper.
 
-** picture of the temp graph**
+![Temperature graph](temp.png)
 
 Assuming the extruder is working, press the extrude button for 10mm and feed the filament into your printer from the top
 while it runs. Extrude 10mm at a time until you see molten filament come out the bottom of the hot end. If it never
 comes out and the stepper starts clicking then you either have a clog in the hot end or the hobbed gear is loose and
 skipping for some reason.
 
-Once you can get filament come out, you can calibrate the extruder. With a ruler measure 50 mm up from the top of the
-extruder and mark on the filament with a marker or piece of tape. Now set extrusion to 10mm and extrude, then measure
-again. If the height is now at 40mm then your printer is already calibrated. If you just built your printer then this
-won’t be the case. Mine went 40mm when I asked for 10mm.
+Once you can get filament come out, you can calibrate the extruder. With a ruler
+measure 50 mm up from the top of the extruder and mark on the filament with a
+marker or piece of tape. Now set extrusion to 10mm and extrude, then measure
+again. If the height is now at 40mm then your printer is already calibrated. If
+you just built your printer then this won’t be the case. Mine went 55mm when I
+asked for 10mm.
 
-** photo of measuring the filament **
+![measuring filament](measure.jpg)
 
-Now that we know how far the printer went when it *thought* it was going 10mm, we can calculate a new E value so that it
-will *actually* go 10mm. Go to the manual control panel and type M501 into the gcode box [image] and press return. The
-console will show a bunch of values. The first line or so should look something like this:
+Now that we know how far the printer went when it *thought* it was going 10mm,
+we can calculate a new E value so that it will *actually* go 10mm. Go to the
+manual control panel and type M501 into the *G-Code* text field and press the
+*Send* button. The console will show a bunch of values. The first line or so
+should look something like this:
 
-** picture of the gcode box **
+```
+< 3:15:46 PM: echo:Stored settings retrieved
+< 3:15:46 PM: echo:Steps per unit:
+< 3:15:46 PM: echo:  M92 X63.36 Y63.36 Z2272.72 E96.00
+< 3:15:46 PM: echo:Maximum feedrates (mm/s):
+< 3:15:46 PM: echo:  M203 X100.00 Y100.00 Z2.00 E14.00
+< 3:15:46 PM: echo:Maximum Acceleration (mm/s2):
+< 3:15:46 PM: echo:  M201 X2000 Y2000 Z30 E10000
+< 3:15:46 PM: echo:Acceleration: S=acceleration, T=retract acceleration
+< 3:15:46 PM: echo:  M204 S3000.00 T3000.00
+< 3:15:46 PM: echo:Advanced variables: S=Min feedrate (mm/s), T=Min travel feedrate (mm/s), B=minimum segment time (ms), X=maximum XY jerk (mm/s),  Z=maximum Z jerk (mm/s),  E=maximum E jerk (mm/s)
+< 3:15:46 PM: echo:  M205 S0.00 T0.00 B20000 X20.00 Z0.40 E5.00
+< 3:15:46 PM: echo:Home offset (mm):
+< 3:15:46 PM: echo:  M206 X0.00 Y0.00 Z0.00
+< 3:15:46 PM: echo:PID settings:
+< 3:15:46 PM: echo:   M301 P22.20 I1.08 D114.00
+< 3:15:46 PM: echo:Min position (mm):
+< 3:15:46 PM: echo:  M210 X0.00 Y0.00 Z0.00
+< 3:15:46 PM: echo:Max position (mm):
+< 3:15:46 PM: echo:  M211 X205.00 Y205.00 Z200.00
+```
 
-[my values]
 
 The last value on that line is the E value, for extruder. Using the incorrect value and how far the printer moved in our
 calibration test we can calculate a new value with this equation:
 
-[equation]
+```
+(old value * software move)/hardware move = new steps.
+```
 
-For example, my printer was at 520 so the equation is [??]. [??] is the new value. 
+The *software move* is how far we told the printer to move. The *hardware move* value is
+how far it actually moved. 
 
-Set your new value by typing this into the G code window:
+When I first built my printer the E value was set to 520.  According to the equation:
 
 ```
-M92 E98
+(520 * 10) / 55 =  95
 ```
-but using your E value instead of 98. Hit return then type
-`M500` and return to save the new value. Type `M501` to see that the value was saved. 
 
-These calibration settings are saved in the printer itself using a special chunk of memory called the EEPROM. These
-settings are preserved even if you cut the power or reflash the printer.
+So my new value is `95`. Set the new value by typing `M92 E95` into the G-Code
+window, but using your E value instead of 95. Now type `M500` and return to save
+the new value. Type `M501` to see that the value was saved.
+
+These calibration settings are saved in the printer itself using a special chunk
+of memory called the EEPROM. These settings are preserved even if you cut the
+power or reflash the printer.
 
 Now try your test again. Measure 50mm, extrude for 10mm, and measure.
 
 **note**
 
-The first extrude command you give after setting a new value may give you spurious results. Ignore the first command and
-measure the second from 50mm.
+The first extrude command you give after setting a new value may give you
+spurious results. **Ignore the first command** and measure the second from 50mm.
 
-Hopefully your printer will move exactly 10mm this time. To be more accurate you can try testing a movement of 50mm or
-100mm instead of 10mm. This will compensate for small irregularities in your filament.
+Hopefully your printer will move exactly 10mm this time. To be more accurate you
+can try testing a movement of 50mm or 100mm instead of 10mm. This will
+compensate for small irregularities in your filament.
 
-
-Almost there! Eventually you will need to repeat the calibration process to find X, Y, and Z values, as well as level
-the bed. However these adjustments aren’t strictly necessary yet. The defaults that came with your printer should be
-okay to start. Calibrating X, Y, and Z will greatly improve the quality of your prints, but aren't needed just to get
-your first print done (along as they aren’t too radically off).
+Almost there! Eventually you will need to repeat the calibration process to find
+X, Y, and Z values, as well as level the bed. However these adjustments aren’t
+strictly necessary yet. The defaults that came with your printer should be okay
+to start. Calibrating X, Y, and Z will greatly improve the quality of your
+prints, but aren't needed just to get your first print done (along as they
+aren’t too radically off).
 
 ## Slic3r setup
 
-To turn a 3D model into instructions that the printer can use we must chop up the model into a bunch of layers. This
-process is called slicing. Repetier is the GUI we are using, but the actual slicing is done by a program embedded inside
-it called *Slic3r*. Before we slice the first model we must set up Slic3r. Click on the Slic3r tab and click the *configure*
-button.
+To turn a 3D model into instructions that the printer can use we must chop up
+the model into a bunch of layers. This process is called slicing. Repetier is
+the GUI we are using, but the actual slicing is done by a program embedded
+inside it called *Slic3r*. Before we slice the first model we must set up
+Slic3r. Click on the Slic3r tab and click the *configure* button.
 
-The first time you open the Slic3r config it will go through a setup wizard. Follow the prompts. Compare your values to
-my screenshots below.
+The first time you open the Slic3r config it will go through a setup wizard.
+Follow the prompts. Compare your values to my screenshots below.
 
 
 ![Slic3r wizard, step 1](slicer_wizard_1.png)
@@ -291,11 +333,11 @@ When you are done with the wizard save the new configuration as ‘Simple’.
 
 Now switch to the Filament settings tab.  Save it with the name ‘Normal’.
 
-** photo of the filament tab**
+![Filament Settings Panel](filament_panel.png)
 
 Switch to the Printer Settings tab. Save it with the  name ‘Normal’.
 
-** photo of the printer settings tab **
+![Printer Settings Panel](printer_panel.png)
 
 Now close the Slic3r configuration dialog. Back in the main Reptier screen, choose your new profiles for Simple, Normal,
 and Normal in Print, Printer, and Filament settings.
@@ -306,15 +348,17 @@ and Normal in Print, Printer, and Filament settings.
 
 Yes, we can finally print something!
 
-Download [this 3D model][calibration_model] from Thingiverse. It’s a test model that will reveal problems with the
-printer settings. On the *Object Placement* tab click the *Add STL File* button and select the model you just
-downloaded.
+Download [this 3D model][calibration_model] from Thingiverse. It’s a test model
+that will reveal problems with the printer settings. On the *Object Placement*
+tab click the *Add STL File* button and select the model you just downloaded.
 
 ![Object Placement](object_placement.png)
 
-Next switch to the *Slicer* panel, and press the great big *slice* button. You should see processing messages in the console.
-When it’s done slicing you can press the big ‘run’ triangle button. Hopefully you will see the printer kick into action.
-It may take a few seconds before actually starting to print because it must heat up the hot end first.
+Next switch to the *Slicer* panel, and press the great big *slice* button. You
+should see processing messages in the console. When it’s done slicing you can
+press the big ‘run’ triangle button. Hopefully you will see the printer kick
+into action. It may take a few seconds before actually starting to print because
+it must heat up the hot end first.
 
 [calibration_model]: http://www.thingiverse.com/thing:24238
 
@@ -322,20 +366,26 @@ Your first print. Don’t worry if your first print looks horrible. Here are my 
 
 ![My first five prints](bad_prints.jpg)
 
-As you can see, they start pretty bad but get better. The first issue you’ll probably have is getting the print to stick to the bed. If it doesn’t stick then raise the hot
-end, scrape off the bad plastic, put some blue painters tape on the bed, and try again.
+As you can see, they start pretty bad but get better. The first issue you’ll
+probably have is getting the print to stick to the bed. If it doesn’t stick then
+raise the hot end, scrape off the bad plastic, put some blue painters tape on
+the bed, and try again.
 
 ![Painters tape on the print bed](painter_tape.jpg)
 
-If the print is very gloppy, possibly so much that it sticks to the hot end instead of the bed, then you are probably
-*over-extruding*. Adjust the extrusion factor in the Slic3r settings. If you have to move the extrusion factor way down
-solve the problem like I did, then that means your extruder calibration is off. You need to recalibrate it.
+If the print is very gloppy, possibly so much that it sticks to the hot end
+instead of the bed, then you are probably *over-extruding*. Adjust the extrusion
+factor in the Slic3r settings. If you have to move the extrusion factor way down
+solve the problem like I did, then that means your extruder calibration is off.
+You need to recalibrate it.
 
-Hopefully you will get a print that at least finishes successfully, even if it doesn’t look quite right.
-Congratulations, you made your first print in THREE DEE!!! You live in the future.
+Hopefully you will get a print that at least finishes successfully, even if it
+doesn’t look quite right. Congratulations, you made your first print in THREE
+DEE!!! You live in the future.
 
-Most likely you’ll have a lot of tuning to do to improve the quality of your prints. The [forums][printrbottalk] are filled with advice on
-how to do this. A few things to check:
+Most likely you’ll have a lot of tuning to do to improve the quality of your
+prints. The [forums][printrbottalk] are filled with advice on how to do this. A
+few things to check:
 
 [printrbottalk]: http://www.printrbottalk.com/
 
@@ -343,48 +393,73 @@ how to do this. A few things to check:
    * Calibrate your X,Y,Z axes so that moving 50mm really does move 50mm.  
    * Level the bed by lowering the hot end to just above the bed and moving it around. If the bed is level then the distance between the hot end and the bed will be the same at all four corners of the bed. If not you must adjust it with the leveling screws.  
    * Check the tightness of your X and Y strings. Any looseness can cause subtle defects in your prints. The strings will loosen up a lot over your first few prints.
-
    * Check the actual thickness of your filament using calipers. It can be off from the stated diameter by as much as 10% which will result in over or under extrusion.
    * Vibration and slipping. The printer will vibrate a bit. On a smooth surface this could cause it to move around. Put something soft but level below it, like contact paper or those rubber sheets used for lining tool drawers.
 
 
-When you are ready to try something more ambitious, there is a world of things to print on Thingiverse. Here’s a few of my favorites:
+When you are ready to try something more ambitious, there is a world of things
+to print on Thingiverse. Here’s a few of my favorites:
+
+   * [Snowflakes](http://www.thingiverse.com/thing:195032)
+   * [Batman Symbol](http://www.thingiverse.com/thing:12381)
+   * [Small Vase](http://www.thingiverse.com/thing:37327)
 
 
+A note on the vase. The 3D model for the vase is filled. You don’t want that.
+Create a new setting for slicer called ‘Vase’ which sets the Horizontal shells
+-> Solid layers -> Top to 0, then set the Infill -> Fill density to 0. This will
+remove the top and insides of the vase, leaving just the bottom and sides.
 
-   * snowflakes
+![3D printed vase](vase.jpg)
 
-   * batman logo
+## Troubleshooting
 
-   * small vase
+### How to reflash your printer.
 
+I’ve had to reflash my printer a few times. I pulled the plug once and scrambled
+the brains of my printrbot. use the upgrader app but don’t accept the default
+firmware it downloads. Instead, download the latest firmware from here [link]
+with your web browser and drag it to the updater icon and follow the
+instructions on screen. This was the source of a lot of my frustration early on.
+The default firmware would appear to work but the extruder stepper would go
+backwards and I had tons of communication issues. With the correct firmware it
+all works perfectly.
 
+### Fixing extruder problems
 
-A note on the vase. The 3D model for the vase is filled. You don’t want that. Create a new setting for slicer called ‘Vase’ which sets the [asdfasdf] This will remove the top and insides of the vase, leaving just the bottom and sides.
-[screenshot]
+Hopefully you left some slack on the cable like I mentioned above. If so then,
+after turning off the heat and letting it cool down, you can just take out the
+four screws holding the stepper in and slide it out the back. Make sure the gear
+is securely attached to the stepper shaft. Also make sure it is the right
+distance from the stepper. When you look at your printer from above the gear and
+roller should be centered with the opening and tube. [picture of mine]
 
+### Cleaning your extruder and hot end
 
-A few upgrades you might want to print
+If your extrusion stepper makes a loud click and the filament stops advancing
+then you may have a clog. Try turning the temp up to 220C, open up the filament
+clamp and push some extrusion through manually. If it still doesn’t come out
+then you definitely have a clog. You’ll have to clean it.
 
-Troubleshooting
+Cool down the hot end to room temp then unplug the printer. Unplug the hot end
+and remove it from the extruder head. Put the Slide off the heat shield then use
+a pliers and a wrench try unscrew the brass nozzle. Keep the wrench on the hex
+nut area half way up, and keep it still. Turn using the pliers on the nozzle.
+After you get it off lightly scrap off any plastic on the outside of the nozzle.
 
-How to reflash your printer.
-I’ve had to reflash my printer a few times. I pulled the plug once and scrambled the brains of my printrbot. use the upgrader app but don’t accept the default firmware it downloads. Instead, download the latest firmware from here [link] with your web browser and drag it to the updater icon and follow the instructions on screen.  This was the source of a lot of my frustration early on. The default firmware would appear to work but the extruder stepper would go backwards and I had tons of communication issues. With the correct firmware it all works perfectly.
-
-Fixing extruder problems
-Hopefully you left some slack on the cable like I mentioned above. If so then, after turning off the heat and letting it cool down, you can just take out the four screws holding the stepper in and slide it out the back.  Make sure the gear is securely attached to the stepper shaft. Also make sure it is the right distance from the stepper. When you look at your printer from above the gear and roller should be centered with the opening and tube. [picture of mine]
-
-Cleaning your extruder and hot end
-
-If your extrusion stepper makes a loud click and the filament stops advancing then you may have a clog. Try turning the temp up to 220C, open up the filament clamp and push some extrusion through manually. If it still doesn’t come out then you definitely have a clog.  You’ll have to clean it.
-
-Cool down the hot end to room temp then unplug the printer. Unplug the hot end and remove it from the extruder head. Put the Slide off the heat shield then use a pliers and a wrench try unscrew the brass nozzle. Keep the wrench on the hex nut area half way up, and keep it still. Turn using the pliers on the nozzle. After you get it off lightly scrap off any plastic on the outside of the nozzle. 
-
-Now we turn to the tube of the hot end. If you look closely you’ll probably see a buildup of dark, possibly black, plastic clogging the tube. Clamp the tube to a vise and plug it back in, without the nozzle attached, to the power and thermistor.  Turn the printer back on and crank up the heat. Hopefully the clog will just melt out.  Then cool everything back down, reassemble, and you are back in business. Watch this video by Youtube user [name] for a visual demonstration.
+Now we turn to the tube of the hot end. If you look closely you’ll probably see
+a buildup of dark, possibly black, plastic clogging the tube. Clamp the tube to
+a vise and plug it back in, without the nozzle attached, to the power and
+thermistor. Turn the printer back on and crank up the heat. Hopefully the clog
+will just melt out. Then cool everything back down, reassemble, and you are back
+in business. Watch this video by Youtube user [name] for a visual demonstration.
 
 clogged extruder
 http://help.printrbot.com/Answers/View/1463/My+filament+is+clogging+and+my+extruder+is+clicking.
 
 http://www.youtube.com/watch?v=GYieRYamhNA
 
+http://www.printrbottalk.com/forum/viewtopic.php?f=105&t=4454&sid=073d9faec7a3463068ba58c4fc173ce2
+
+http://zheng3.com/2013/06/02/calibrating-the-printrbot-simple/
 
