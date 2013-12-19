@@ -37,12 +37,15 @@ help. Really look at the pictures. They help a lot.
 [v2guide]: http://help.printrbot.com/Guide/Printrbot+Simple+with+Large+Motors/59
 [simpleforum]: http://www.printrbottalk.com/forum/viewforum.php?f=102
 
-Before you go build it, a few words of advice. You *really* need some narrow
-needle nose pliers for inserting nuts into the laser cut holes. You also need
-2.5mm, 1.5mm, and 1/16" Allen wrenchs or driver with hex bits. I highly suggest
-getting hex bits for your cordless drill. The drill will make assembly *much*
-faster, especially towards the end when you are sticking lots of wooden parts
-together.
+Before you go build it, a few words of advice. Here's a picture of the tools I used.
+
+![Assembly tools](tools.jpg)
+
+You *really* need some narrow needle nose pliers for inserting nuts into the
+laser cut holes. You also need 2.5mm, 1.5mm, and 1/16" Allen wrenchs or driver
+with hex bits. I highly suggest getting hex bits for your cordless drill. The
+drill will make assembly *much* faster, especially towards the end when you are
+sticking lots of wooden parts together.  You also need a ruler with a metric side.
 
 
 A few tips: 
@@ -52,9 +55,10 @@ Instead, rotate the stepper 90 degrees so the cable comes out of the side instea
 This extra slack will let you quickly remove the stepper motor later when you need
 to make extruder fixes.
 
-*on photo of the extruder drive area*
+![Extruder Closeup](extruder_closeup.jpg)
 
 Now, go [build your bot!][v2guide], then come back here.
+
 
 
 Number one link:
@@ -73,7 +77,7 @@ on the **print bed**, which in our case is plywood. More advance printers have b
 of metal, glass, or other materials; often heated. These are upgrades you can
 apply later but don’t matter right now because we are printing PLA.
 
-** photo diagram of the printer **
+![Diagram of the Printer](printer_diagram.jpg)
 
 
 **Filament**: the spool of plastic you feed into the printer is called filament.
@@ -82,7 +86,7 @@ a tube called the **hot end**. As the name suggests, the hot end gets very hot t
 melt the plastic, then squirts it onto your print bed. The temperature of the
 hot end varies based on the plastic you are using. 
 
-** photo of the extruder mechanism**
+![Filament closeup](filament.jpg)
 
 Your kit came with a kind of plastic called **PLA**. This is a bio-plastic that
 melts at fairly low temperatures and does not require a heated bed. This makes
@@ -91,13 +95,15 @@ is used to make Legos, among other things. ABS melts at a higher temp and
 requires a heated bed to stick and cool properly. We won’t be working with ABS
 in this guide. Consider it an exercise for the advance reader.
 
-**photo of PLA spool**
-
 When you built your printer you attached three contact switches which look like
 this. They are called the **end stops**. The printer software uses these to tell
-where the end of your bed is. This makes calibration a *lot* easier.
+where the end of your bed is. This makes calibration a *lot* easier. 
 
-**photo of end stops**
+![Z end stop closeup](endstop.jpg)
+
+Your printer may not have the extra board on the right edge of this photo. My
+printer has the Simple Tower upgrade which adds extra enclosing boards.
+
 
 ## Connecting to your computer
 
@@ -131,7 +137,7 @@ toolbar.
 ![Repetier printer settings](printersettings.png)
 
 ### Create a new printer
-Click the ‘add’ button to create a new printer. name it *simple*.
+Click the ‘add’ button to create a new printer. name it *Simple*.
 
 ### Connection
 
