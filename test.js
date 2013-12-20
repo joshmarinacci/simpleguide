@@ -6,7 +6,7 @@ md.setOptions({
         tables: true, // gfm tables
         breaks: false, // gfm breaks
         pedantic: false, 
-        sanitize: true, //ignore html
+        sanitize: false, //ignore html
         smartLists:true, // better lists
         smartypants:false, //smart punctuation
 });

@@ -1,14 +1,17 @@
-# Josh's Getting Started Guide for the Printrbot Simple
+# Getting Started with the Printrbot Simple
+### by josh marinacci
 
 
-![Printrbot Simple](simple_front.png)
 
 Gentle reader: Congratulations on the purchase or gift of your new Printrbot
 Simple. I’ve really enjoyed mine and I think you will have a lot fun with yours
-too. If you don't have one yet, I encourage you to [get one at Printrbot.com][printrbotcom]. I've found it to be
-a completely fun and engaging learning experience. 
+too. If you don't have one yet, I encourage you to [get one at
+Printrbot.com][printrbotcom]. I've found it to be a completely fun and engaging
+learning experience. I don't work for them; I'm just an avid fan.
 
 [printrbotcom]:http://printrbot.com/
+
+![Printrbot Simple](simple_front.png)
 
 My goal with this guide is not to make you an expert in 3D printing. My goal is
 simply to get you from assembly to your first decent print. Your prints won’t be
@@ -17,15 +20,14 @@ challenging models to print; but hopefully you will be ready to experiment and
 start *learning* instead of just being frustrated.
 
 **NOTE**
-
+<div class='note'>
 I did not write this guide from scratch. I'm indebted to the community on
 the PrintrBotTalk forums for helping me get started.  In particular
 [The Complete Guide][forumguide] by *bradleyc* helped me work through
 many important details.
 
 [forumguide]: http://www.printrbottalk.com/forum/viewtopic.php?f=105&t=4454&sid=073d9faec7a3463068ba58c4fc173ce2
-
-It's also important to note I don't work for Printrbot. I'm just a big fan of their products.
+</div>
 
 
 
@@ -68,17 +70,16 @@ side. Oh, and some paper towels or a rag. Your hands will get dirty from the
 laser cut wood and oil on the screws.
 
 
-A few tips: 
+A few tips for assembly: 
 
-On step 52, leave extra slack in the stepper cable. They show it being tight
-with only the fan cable loose. Instead, rotate the stepper 90 degrees so the
-cable comes out of the side instead of the bottom. This extra slack will let you
-quickly remove the stepper motor later when you need to make extruder fixes.
+On step 52, leave extra slack in the stepper cable. The photo shows it being
+tight with only the fan cable loose. Instead, rotate the stepper 90 degrees so
+the cable comes out of the side rather than of the bottom. This extra slack will let
+you quickly remove the stepper motor later when you need to make extruder fixes.
 
 ![Extruder Closeup](extruder_closeup.jpg)
 
 Now, go [build your bot!][v2guide], then come back here.
-
 
 
 Number one link:
@@ -110,12 +111,12 @@ hot end varies based on the plastic you are using.
 
 Your kit came with a kind of plastic called **PLA**. This is a bio-plastic that
 melts at fairly low temperatures and does not require a heated bed. This makes
-it easy to work with. The other common kind of plastic you will see is **ABS** which
-is used to make Legos, among other things. ABS melts at a higher temp and
-requires a heated bed to stick and cool properly. We won’t be working with ABS
-in this guide. Consider it an exercise for the advance reader.
+it easy to work with. The other common kind of plastic you will see is **ABS**,
+which is used to make Lego among other things. ABS melts at a higher temp and
+requires a heated bed to cool properly. We won’t be working with ABS in this
+guide. Consider it an exercise for the advance reader.
 
-When you built your printer you attached three contact switches which look like
+When you assembled your printer you attached three contact switches which look like
 this. They are called the **end stops**. The printer software uses these to tell
 where the end of your bed is. This makes calibration a *lot* easier. 
 
@@ -297,10 +298,12 @@ power or reflash the printer.
 
 Now try your test again. Measure 50mm, extrude for 10mm, and measure.
 
-**note**
+**NOTE**
 
+<div class='note'>
 The first extrude command you give after setting a new value may give you
 spurious results. **Ignore the first command** and measure the second from 50mm.
+</div>
 
 Hopefully your printer will move exactly 10mm this time. To be more accurate you
 can try testing a movement of 50mm or 100mm instead of 10mm. This will
@@ -415,10 +418,12 @@ to print on Thingiverse. Here’s a few of my favorites:
    * [Small Vase](http://www.thingiverse.com/thing:37327)
 
 
+<div class='note'>
 A note on the vase. The 3D model for the vase is filled. You don’t want that.
 Create a new setting for slicer called ‘Vase’ which sets the Horizontal shells
 -> Solid layers -> Top to 0, then set the Infill -> Fill density to 0. This will
 remove the top and insides of the vase, leaving just the bottom and sides.
+</div>
 
 ![3D printed vase](vase.jpg)
 
