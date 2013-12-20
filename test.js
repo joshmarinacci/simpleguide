@@ -17,7 +17,9 @@ var text = fs.readFileSync('text.md');
 md(text.toString(),function(err,content) {
         if(err) throw err;
     fs.writeFileSync('text.html',
-        "<html><head>"
+        "<html>"
+        +'<meta http-equiv="Content-Type" content="text/html;charset=utf-8">'
+        +"<head>"
         +"<link rel='stylesheet' href='style.css'/>"
         +"</head>"
         +"<body><div id='content'>"

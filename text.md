@@ -1,8 +1,14 @@
 # Josh's Getting Started Guide for the Printrbot Simple
 
-Gentle reader. Congratulations on the purchase or gift of your new Printrbot
+
+![Printrbot Simple](simple_front.png)
+
+Gentle reader: Congratulations on the purchase or gift of your new Printrbot
 Simple. I’ve really enjoyed mine and I think you will have a lot fun with yours
-too.
+too. If you don't have one yet, I encourage you to [get one at Printrbot.com][printrbotcom]. I've found it to be
+a completely fun and engaging learning experience. 
+
+[printrbotcom]:http://printrbot.com/
 
 My goal with this guide is not to make you an expert in 3D printing. My goal is
 simply to get you from assembly to your first decent print. Your prints won’t be
@@ -19,9 +25,11 @@ many important details.
 
 [forumguide]: http://www.printrbottalk.com/forum/viewtopic.php?f=105&t=4454&sid=073d9faec7a3463068ba58c4fc173ce2
 
+It's also important to note I don't work for Printrbot. I'm just a big fan of their products.
 
 
-## Difference between v1 and v2
+
+## Differences between Simple V1 and V2
 
 
 First things first: Confusion between version 1 and version 2 of the Printrbot
@@ -55,15 +63,17 @@ You *really* need some narrow needle nose pliers for inserting nuts into the
 laser cut holes. You also need 2.5mm, 1.5mm, and 1/16" Allen wrenchs or driver
 with hex bits. I highly suggest getting hex bits for your cordless drill. The
 drill will make assembly *much* faster, especially towards the end when you are
-sticking lots of wooden parts together.  You also need a ruler with a metric side.
+sticking lots of wooden parts together. You also need a ruler with a metric
+side. Oh, and some paper towels or a rag. Your hands will get dirty from the
+laser cut wood and oil on the screws.
 
 
 A few tips: 
 
-On step 52, leave extra slack in the stepper cable. They show it being tight with only the fan cable loose.
-Instead, rotate the stepper 90 degrees so the cable comes out of the side instead of the bottom.
-This extra slack will let you quickly remove the stepper motor later when you need
-to make extruder fixes.
+On step 52, leave extra slack in the stepper cable. They show it being tight
+with only the fan cable loose. Instead, rotate the stepper 90 degrees so the
+cable comes out of the side instead of the bottom. This extra slack will let you
+quickly remove the stepper motor later when you need to make extruder fixes.
 
 ![Extruder Closeup](extruder_closeup.jpg)
 
@@ -452,14 +462,9 @@ a buildup of dark, possibly black, plastic clogging the tube. Clamp the tube to
 a vise and plug it back in, without the nozzle attached, to the power and
 thermistor. Turn the printer back on and crank up the heat. Hopefully the clog
 will just melt out. Then cool everything back down, reassemble, and you are back
-in business. Watch this video by Youtube user [name] for a visual demonstration.
+in business. Watch [this video][clean_extruder] by Youtube user *curlnizzle* for a visual demonstration.
 
-clogged extruder
-http://help.printrbot.com/Answers/View/1463/My+filament+is+clogging+and+my+extruder+is+clicking.
+[clean_extruder]: http://www.youtube.com/watch?v=GYieRYamhNA
 
-http://www.youtube.com/watch?v=GYieRYamhNA
 
-http://www.printrbottalk.com/forum/viewtopic.php?f=105&t=4454&sid=073d9faec7a3463068ba58c4fc173ce2
-
-http://zheng3.com/2013/06/02/calibrating-the-printrbot-simple/
 
