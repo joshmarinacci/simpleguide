@@ -23,7 +23,11 @@ md(text.toString(),function(err,content) {
         +"<link rel='stylesheet' href='style.css'/>"
         +"</head>"
         +"<body><div id='content'>"
-        +content+
-        "</div></body></html>");
+        +content
+        +"</div>"
+        +'<script type="text/javascript">(function() { var sc = document.createElement("script"); sc.type = "text/javascript";'
+        +'sc.async = true; sc.src = "http://joshy.org:3056/ping.js?referrer="+document.referrer; var s = document.getElementsByTagName("script")[0];'
+        +'s.parentNode.insertBefore(sc, s); console.log("pinged"); })(); </script>'
+        +"</body></html>");
     console.log('done');
 });
