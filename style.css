@@ -6,7 +6,7 @@ body {
 
 #content {
     border: 0px solid black;
-    width: 50em;
+    width: 40em;
 }
 
 img {
@@ -14,6 +14,21 @@ img {
     max-height: 500px;
     border: 1px solid black;
     padding: 1px;
+}
+
+.photo {
+    border: 0px solid red;
+    position: relative;
+}
+.photo a:after {
+    content: 'click to enlarge';
+    border: 1px solid gray;
+    padding: 0.3em;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    position: absolute;
+    left: 0;
+    bottom: 0;
 }
 
 pre {

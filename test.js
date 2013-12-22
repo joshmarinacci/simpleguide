@@ -1,5 +1,22 @@
 var fs = require('fs');
 var md = require("marked");
+var easyimg = require('easyimage');
+
+fs.mkdir("thumbs");
+
+var r = new md.Renderer();
+r.image = function(href, title, text) {
+    console.log(href,title,text);
+    easyimg.resize({
+        src:href,
+        dst:'thumbs/'+href,
+        height:500,
+        width:500,
+    },function(err,stdout,stderr) {
+        console.log('resized = ', err);
+    });
+    return "<div class='photo'><a href='"+href+"'><img src='thumbs/"+href+"' title='"+text+"'/></a></div>";
+}
 
 md.setOptions({
         gfm: true, //git hub flavored markdown
@@ -9,6 +26,7 @@ md.setOptions({
         sanitize: false, //ignore html
         smartLists:true, // better lists
         smartypants:false, //smart punctuation
+        renderer: r,
 });
 
 
