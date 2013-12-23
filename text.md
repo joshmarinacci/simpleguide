@@ -1,3 +1,7 @@
+Like this? [Read my blog.](http://joshondesign.com/)
+
+Found a problem? [File a bug on github.](https://github.com/joshmarinacci/simpleguide)
+
 # Getting Started with the Printrbot Simple
 ### by josh marinacci
 
@@ -23,10 +27,10 @@ start *learning* instead of just being frustrated.
 <div class='note'>
 I did not write this guide from scratch. I'm indebted to the community on
 the PrintrBotTalk forums for helping me get started.  In particular
-[The Complete Guide][forumguide] by *bradleyc* helped me work through
+<a href='http://www.printrbottalk.com/forum/viewtopic.php?f=105&t=4454&sid=073d9faec7a3463068ba58c4fc173ce2'>The Complete Guide</a> by *bradleyc* helped me work through
 many important details.
 
-[forumguide]: http://www.printrbottalk.com/forum/viewtopic.php?f=105&t=4454&sid=073d9faec7a3463068ba58c4fc173ce2
+
 </div>
 
 
@@ -467,9 +471,97 @@ a buildup of dark, possibly black, plastic clogging the tube. Clamp the tube to
 a vise and plug it back in, without the nozzle attached, to the power and
 thermistor. Turn the printer back on and crank up the heat. Hopefully the clog
 will just melt out. Then cool everything back down, reassemble, and you are back
-in business. Watch [this video][clean_extruder] by Youtube user *curlnizzle* for a visual demonstration.
+in business. Watch [this video][clean_extruder] by Youtube user *curlnizzle* for
+a visual demonstration.
 
 [clean_extruder]: http://www.youtube.com/watch?v=GYieRYamhNA
+
+### Diagnosing print quality issues
+
+Pretty much every print quality issue comes down to calibration. Whenever you
+are experiencing print issues the first thing you should do is recalibrate the
+X, Y, Z axis and Extruder value. Also check that the strings for the X and Y
+axis are tight. And finally, check that the Z axis is just barely above the
+print bed when homed. 
+
+You can often tell what needs to be recalibrated by the particular defects in
+your prints. Let me show you photos of the calibration I recently did on my
+Simple.
+
+
+
+I started with [this calibration object][calibration_model]. It should be
+exactly 25mm along each dimension.
+
+![3D printed vase](test_tootall.jpg)
+
+Notice that while the corners are pretty sharp the square hole in the side isn't
+actually square. It is supposed to be 5mm by 5mm, but clearly isn't. This meant
+I needed to recalibrate my X, Y, and Z axis. You might thing I only need to
+adjust the Z axis, but the Z was actually pretty good. The X and Y were too
+narrow.
+
+
+
+To calibrate I measured the length of the X and Y sides, discovering they were
+about 15% off. After calibration I reprinted the object.
+
+![3D printed vase](test_compare_1.jpg)
+
+Now we can see that the bottom has defects. It feels loose, as if there wasn't
+enough material at the bottom. Also notice defects along some of the horizontal
+lines higher up.
+
+The problem now is that I'm not extruding enough material. I had set my
+extrusion factor to 0.6. I now see that I had previously pulled the extrusion
+factor down because the x and y were squished, resulting in thicker layers. With
+the X and Y fixed I'm now not getting enough. The fix was to set the extrusion
+factor back to 1.0.
+
+
+Next print:
+
+![3D printed vase](test_compare_2.jpg)
+
+Much better. The bottom is still loose, but the layers are uniform. No
+defects. Here's a shot of before and after.
+
+![3D printed vase](test_compare.jpg)
+
+Now that I'm extruding the right amount material, let's figure out what's going
+on at the bottom.
+
+![3D printed vase](test_bottoms.jpg)
+
+On the left is the current print.  On the right is what we want. It looks like
+the filament went all over the place until it stacked up enough to provide a base
+for the upper layers.  Since our extrusion factor is okay there's only one more
+place to look. Bed height.
+
+I homed the Z axis then checked the distance between the hot end and the bed.
+Sure enough, waaay too much space. About two millimeters. The distance should
+be almost 0, just enough to slip a few sheets of paper in. 
+
+To fix the Z axis I adjusted the Z end stop screw, pulled the Z axis up a few
+centimeters manually (with the Print Panel in Repetier), then pressed the Home
+button. The printer recalibrated the Z and I measured again.  Still a bit high,
+so i adjusted the screw again and re-homed. 
+
+One more print. Perfect!
+
+![3D printed vase](test_perfect.jpg)
+
+Actually, it's not quite perfect. I think the X axis is still slightly off and
+you can see the top layer looks slightly different than the others. Still, it's
+more than good enough to start building usable models like snowflakes and phone
+docks for Christmas.
+
+Have fun!
+
+
+
+
+
 
 
 

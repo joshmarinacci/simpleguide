@@ -38,6 +38,7 @@ md(text.toString(),function(err,content) {
         "<html>"
         +'<meta http-equiv="Content-Type" content="text/html;charset=utf-8">'
         +"<head>"
+        +"<title>Printrbot Simple Guide</title>"
         +"<link rel='stylesheet' href='style.css'/>"
         +"</head>"
         +"<body><div id='content'>"
