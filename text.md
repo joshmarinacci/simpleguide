@@ -436,13 +436,15 @@ remove the top and insides of the vase, leaving just the bottom and sides.
 ### How to reflash your printer.
 
 I’ve had to reflash my printer a few times. I pulled the plug once and scrambled
-the brains of my printrbot. use the upgrader app but don’t accept the default
-firmware it downloads. Instead, download the latest firmware from here [link]
-with your web browser and drag it to the updater icon and follow the
-instructions on screen. This was the source of a lot of my frustration early on.
-The default firmware would appear to work but the extruder stepper would go
-backwards and I had tons of communication issues. With the correct firmware it
-all works perfectly.
+the brains of my printrbot. Use the upgrader app but **don’t accept the default
+firmware** it downloads. Instead, download the latest firmware from
+[here](https://github.com/Printrbot/Marlin/releases/tag/unified-v2) with your
+web browser and drag it to the updater icon and follow the instructions on
+screen. *This firmware is Printrbot's own slightly modified firmware for the Simple*. 
+Using the default was the source of a lot of my frustration early on because
+the printer would appear work but the extruder stepper would go backwards and 
+I had many communications errors. With the correct firmware it all works
+perfectly.
 
 ### Fixing extruder problems
 
@@ -561,6 +563,20 @@ Have fun!
 
 
 
+
+## Upgrades
+
+You might want to print a few upgrades.
+
+If you have the Simple with the Tower upgrade, then you might want [this guide
+for the Z axis](http://www.thingiverse.com/thing:203071)
+
+Bed leveling screw grips
+http://www.thingiverse.com/thing:103519
+
+A filament guide
+
+http://www.thingiverse.com/thing:128240
 
 
 
